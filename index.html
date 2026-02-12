@@ -1193,6 +1193,39 @@ body {
 .regenerate-btn.show {
   display: flex;
 }
+/* 接收消息按钮 */
+.receive-msg-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  margin: 10px auto;
+  box-shadow: 0 2px 8px rgba(126,184,180,0.4);
+  transition: all 0.2s;
+}
+
+.receive-msg-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(126,184,180,0.3);
+}
+
+.receive-msg-btn.show {
+  display: flex;
+}
+
+.receive-msg-btn.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
 .chat-send-btn svg {
   margin-left: 1px;
@@ -1201,15 +1234,17 @@ body {
 /* ========== 底部导航栏 ========== */
 .tab-bar {
   width: 100%;
-  height: 56px;
+  min-height: 56px;
   background: var(--card);
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-shrink: 0;
-  padding-bottom: var(--safe-bottom);
+  padding-bottom: calc(var(--safe-bottom) + 20px);
+  padding-top: 8px;
 }
+
 
 .tab-item {
   display: flex;
@@ -1260,6 +1295,971 @@ body {
 
 .page-me.active {
   display: flex;
+}
+/* ========== 发现页面 ========== */
+.page-discover {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg);
+}
+
+.page-discover.active {
+  display: flex;
+}
+
+.discover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.discover-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.discover-item:active {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
+
+.discover-item-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.discover-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.discover-item-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.discover-item-desc {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.discover-item-arrow {
+  flex-shrink: 0;
+}
+/* ========== 论坛页面 ========== */
+.forum-page {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  z-index: 500;
+  display: none;
+  flex-direction: column;
+}
+
+.forum-page.active {
+  display: flex;
+}
+
+.forum-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.forum-header h2 {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.forum-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 论坛卡片 */
+.forum-card {
+  background: var(--card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.forum-card:active {
+  transform: scale(0.98);
+}
+
+.forum-card-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(135deg, var(--accent-light) 0%, #e8f0f8 100%);
+  opacity: 0.6;
+}
+
+.forum-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.forum-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.forum-card-title .forum-icon {
+  font-size: 18px;
+}
+
+.forum-card-desc {
+  font-size: 12px;
+  color: var(--text-sub);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.forum-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--text-hint);
+}
+
+.forum-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.forum-card-members {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.forum-card-members .member-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 2px solid var(--card);
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-hint);
+  overflow: hidden;
+}
+
+.forum-card-members .member-avatar:first-child {
+  margin-left: 0;
+}
+
+.forum-card-members .member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.forum-card-members .member-more {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+/* 创建论坛按钮 */
+.btn-create-forum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-create-forum:active {
+  transform: scale(0.98);
+  background: var(--accent);
+  color: #fff;
+}
+
+/* 空状态 */
+.forum-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: var(--text-hint);
+  gap: 12px;
+}
+
+.forum-empty svg {
+  opacity: 0.3;
+}
+
+.forum-empty p {
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ========== 创建/编辑论坛弹窗 ========== */
+.forum-edit-page {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  z-index: 550;
+  display: none;
+  flex-direction: column;
+}
+
+.forum-edit-page.active {
+  display: flex;
+}
+
+.forum-edit-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.forum-edit-footer {
+  padding: 14px 16px;
+  padding-bottom: calc(14px + var(--safe-bottom));
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+}
+
+.forum-edit-footer .btn-save {
+  flex: 1;
+}
+
+.forum-edit-footer .btn-delete-forum {
+  width: 50px;
+  height: 44px;
+  border: 1px solid #e06060;
+  border-radius: var(--radius-sm);
+  background: #fef0f0;
+  color: #e06060;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.forum-edit-footer .btn-delete-forum:active {
+  background: #e06060;
+  color: #fff;
+}
+
+/* 成员选择 */
+.member-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.member-selector-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.member-selector-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.member-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.member-chip.selected {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.member-chip:active {
+  transform: scale(0.95);
+}
+
+.member-chip-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-hint);
+}
+
+.member-chip-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-chip-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.member-chip.selected .member-chip-name {
+  color: var(--accent-dark);
+}
+
+/* ========== 论坛详情页 ========== */
+.forum-detail-page {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  z-index: 520;
+  display: none;
+  flex-direction: column;
+}
+
+.forum-detail-page.active {
+  display: flex;
+}
+
+.forum-detail-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.forum-detail-header-top {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.forum-detail-header-top h2 {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.forum-detail-banner {
+  padding: 0 16px 14px;
+}
+
+.forum-detail-banner .forum-worldview {
+  font-size: 12px;
+  color: var(--text-sub);
+  line-height: 1.6;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+}
+
+.forum-detail-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 帖子卡片 */
+.post-card {
+  background: var(--card);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.post-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-hint);
+  flex-shrink: 0;
+}
+
+.post-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-author-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-author-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.post-author-name .author-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.post-author-name .author-tag.netizen {
+  background: #f0f0f0;
+  color: #888;
+}
+
+.post-time {
+  font-size: 11px;
+  color: var(--text-hint);
+}
+
+.post-content {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.65;
+  margin-bottom: 12px;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.post-content .post-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.post-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-sub);
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.post-action-btn:active {
+  color: var(--accent);
+}
+
+.post-action-btn.liked {
+  color: #e06080;
+}
+
+/* 帖子评论区 */
+.post-comments {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post-comment {
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+.post-comment-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-hint);
+  flex-shrink: 0;
+}
+
+.post-comment-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-comment-author {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  margin-bottom: 2px;
+}
+
+.post-comment-author .reply-to {
+  font-weight: 400;
+  color: var(--text-sub);
+}
+
+.post-comment-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.post-comment-time {
+  font-size: 10px;
+  color: var(--text-hint);
+  margin-top: 3px;
+}
+
+/* 评论输入 */
+.post-comment-input {
+  display: none;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+.post-comment-input.show {
+  display: flex;
+}
+
+.post-comment-input input {
+  flex: 1;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 0 14px;
+  font-size: 13px;
+  background: var(--card);
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+}
+
+.post-comment-input input:focus {
+  border-color: var(--accent);
+}
+
+.post-comment-input button {
+  height: 34px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 17px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.post-comment-input button:active {
+  background: var(--accent-dark);
+}
+
+/* 刷新按钮 */
+.forum-refresh-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.btn-refresh-forum {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: 1.5px solid var(--accent);
+  border-radius: 20px;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-refresh-forum:active {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(0.95);
+}
+
+.btn-refresh-forum.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 加载状态 */
+.forum-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 12px;
+  color: var(--text-sub);
+  font-size: 13px;
+}
+/* ========== 消息弹窗通知 ========== */
+.notification-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+  padding-top: calc(10px + var(--safe-top));
+  pointer-events: none;
+  gap: 8px;
+}
+
+.notification-toast {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translateY(-120%);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.notification-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.notification-toast.hiding {
+  transform: translateY(-120%);
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+
+.notification-toast:active {
+  transform: scale(0.98);
+}
+
+.notification-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-hint);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.notification-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notification-avatar .notif-icon {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.notification-avatar .notif-icon.moments {
+  background: linear-gradient(135deg, #ff6b6b, #ffa502);
+}
+
+.notification-avatar .notif-icon.forum {
+  background: linear-gradient(135deg, #7eb8b4, #5a9e99);
+}
+
+.notification-body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.notification-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.notification-app {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.notification-time {
+  font-size: 11px;
+  color: var(--text-hint);
+}
+
+.notification-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-text {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notification-close {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.notification-toast:hover .notification-close {
+  opacity: 1;
+}
+
+.notification-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 不同类型的通知样式 */
+.notification-toast.type-message {
+  border-left: 3px solid var(--accent);
+}
+
+.notification-toast.type-moments {
+  border-left: 3px solid #ff6b6b;
+}
+
+.notification-toast.type-forum {
+  border-left: 3px solid #7eb8b4;
+}
+
+/* 通知进度条动画 */
+.notification-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 0 0 0 16px;
+  animation: notifProgress 4s linear forwards;
+}
+
+.notification-toast.type-moments .notification-progress {
+  background: linear-gradient(90deg, #ff6b6b, #ffa502);
+}
+
+.notification-toast.type-forum .notification-progress {
+  background: linear-gradient(90deg, #7eb8b4, #5a9e99);
+}
+
+@keyframes notifProgress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+/* 通知出现时的光效 */
+.notification-toast::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  opacity: 0;
+  animation: notifShine 0.6s ease-out 0.2s forwards;
+}
+
+@keyframes notifShine {
+  0% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+/* 头像弹跳动画 */
+.notification-toast.show .notification-avatar {
+  animation: avatarBounce 0.5s ease-out 0.1s;
+}
+
+@keyframes avatarBounce {
+  0% { transform: scale(0.5); }
+  50% { transform: scale(1.1); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* 振动效果（可选） */
+@keyframes notifVibrate {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.notification-toast.vibrate {
+  animation: notifVibrate 0.3s ease-in-out;
 }
 
 .me-profile-card {
@@ -2744,6 +3744,14 @@ body {
 .moment-action-btn.liked {
   color: #e06080;
 }
+/* 删除动态按钮 */
+.moment-action-btn.delete {
+  color: var(--text-hint);
+}
+
+.moment-action-btn.delete:active {
+  color: #e06060;
+}
 
 /* 点赞区域 */
 .moment-likes {
@@ -3021,8 +4029,9 @@ body {
 }
 .moments-header-banner {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
+
 
 .moments-header-banner > img {
   width: 100%;
@@ -3085,6 +4094,7 @@ body {
 </style>
 </head>
 <body>
+
 
 <!-- ===== 主页面 ===== -->
 <div class="page-main" id="pageMain"><!-- 状态栏 -->
@@ -3163,6 +4173,44 @@ body {
       </div>
     </div>
   </div>
+<!-- 发现页面 -->
+<div class="page-discover" id="pageDiscover">
+  <div class="discover-list">
+    <!-- 论坛入口 -->
+    <div class="discover-item" id="btnEnterForum">
+      <div class="discover-item-icon" style="background:linear-gradient(135deg,#e8f4f2,#d4ede9);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="4" width="18" height="16" rx="3" stroke="var(--accent)" stroke-width="1.8"/>
+          <path d="M7 9h10M7 13h6" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="discover-item-info">
+        <div class="discover-item-title">论坛</div>
+        <div class="discover-item-desc">创建专属世界观论坛，与角色互动</div>
+      </div>
+      <svg class="discover-item-arrow" width="8" height="14" viewBox="0 0 8 14" fill="none">
+        <path d="M1 1l6 6-6 6" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    
+    <!-- 更多功能占位 -->
+    <div class="discover-item" style="opacity:0.5;pointer-events:none;">
+      <div class="discover-item-icon" style="background:#f0f0f0;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="8" stroke="#ccc" stroke-width="1.8"/>
+          <path d="M12 8v4l2 2" stroke="#ccc" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="discover-item-info">
+        <div class="discover-item-title">更多功能</div>
+        <div class="discover-item-desc">敬请期待...</div>
+      </div>
+      <svg class="discover-item-arrow" width="8" height="14" viewBox="0 0 8 14" fill="none">
+        <path d="M1 1l6 6-6 6" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
 
   <!-- "我的"页面 -->
   <div class="page-me" id="pageMe">
@@ -3262,35 +4310,69 @@ body {
   </div>
 
   <!-- 底部导航栏 -->
-  <div class="tab-bar" id="tabBar">
-    <div class="tab-item active" data-tab="chat">
-      <div class="tab-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M20 12c0 4.418-3.582 8-8 8a8.06 8.06 0 01-3.2-.66L4 21l1.66-4.8A8.06 8.06 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 11h.01M12 11h.01M15 11h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <span class="tab-label">聊天</span>
+<div class="tab-bar" id="tabBar">
+  <div class="tab-item active" data-tab="chat">
+    <div class="tab-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M20 12c0 4.418-3.582 8-8 8a8.06 8.06 0 01-3.2-.66L4 21l1.66-4.8A8.06 8.06 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 11h.01M12 11h.01M15 11h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
     </div>
-        <div class="tab-item" data-tab="moments">
-      <div class="tab-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M8 12.5l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <span class="tab-label">朋友圈</span>
+    <span class="tab-label">聊天</span>
+  </div>
+  <div class="tab-item" data-tab="moments">
+    <div class="tab-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M8 12.5l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-
-    <div class="tab-item" data-tab="me">
-      <div class="tab-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
-          <path d="M5 20c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      </div>
-      <span class="tab-label">我的</span>
+    <span class="tab-label">朋友圈</span>
+  </div>
+  <div class="tab-item" data-tab="discover">
+    <div class="tab-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
+    <span class="tab-label">发现</span>
+  </div>
+  <div class="tab-item" data-tab="me">
+    <div class="tab-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M5 20c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="tab-label">我的</span>
   </div>
 </div>
+<!-- 消息通知容器 -->
+<div class="notification-container" id="notificationContainer"></div>
+<!-- 悬浮全屏按钮 -->
+<button id="floatingFullscreenBtn" style="
+  position: fixed;
+  top: 120px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.2s;
+" title="全屏模式">
+  <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+    <path d="M3 7V4a1 1 0 011-1h3M13 3h3a1 1 0 011 1v3M17 13v3a1 1 0 01-1 1h-3M7 17H4a1 1 0 01-1-1v-3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
 <!-- 发朋友圈浮动按钮 -->
 <button class="moment-fab" id="momentFab">
   <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
@@ -3319,7 +4401,137 @@ body {
     </div>
   </div>
 </div>
+<!-- ===== 论坛列表页 ===== -->
+<div class="forum-page" id="forumPage">
+  <div class="forum-header">
+    <button class="btn-back" id="btnBackFromForum">
+      <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
+        <path d="M10 2L2 10l8 8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <h2>论坛</h2>
+  </div>
+  <div class="forum-body" id="forumBody">
+    <div class="btn-create-forum" id="btnCreateForum">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+        <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      创建新论坛
+    </div>
+    <div id="forumList"></div>
+    <div class="forum-empty" id="forumEmpty" style="display:none;">
+      <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+        <rect x="10" y="12" width="44" height="40" rx="6" stroke="#ccc" stroke-width="1.5"/>
+        <path d="M20 24h24M20 34h16M20 44h20" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <p>还没有论坛<br>创建一个专属世界观论坛吧</p>
+    </div>
+  </div>
+</div>
 
+<!-- ===== 创建/编辑论坛页 ===== -->
+<div class="forum-edit-page" id="forumEditPage">
+  <div class="forum-header">
+    <button class="btn-back" id="btnBackFromForumEdit">
+      <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
+        <path d="M10 2L2 10l8 8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <h2 id="forumEditTitle">创建论坛</h2>
+  </div>
+  <div class="forum-edit-body">
+    <div class="form-group">
+      <label class="form-label">论坛名称</label>
+      <input class="form-input" type="text" id="forumEditName" placeholder="例如：魔法学院、末日生存..." maxlength="20">
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">论坛图标</label>
+      <input class="form-input" type="text" id="forumEditIcon" placeholder="输入一个emoji，如 🏰 🌟 🎮" maxlength="2">
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">世界观设定</label>
+      <textarea class="form-textarea" id="forumEditWorldview" placeholder="描述这个论坛的世界观、背景设定、时代背景等...&#10;&#10;例如：这是一个魔法与科技并存的世界，人们可以使用魔法进行日常生活..." style="min-height:120px;"></textarea>
+    </div>
+    
+    <div class="member-selector">
+      <div class="member-selector-title">选择论坛成员（这些角色会在论坛中发帖互动）</div>
+      <div class="member-selector-list" id="forumMemberList"></div>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">API 配置（用于生成帖子内容）</label>
+      <button class="api-config-btn" id="btnForumApiSelect" type="button">
+        <span class="label" id="forumSelectedApiLabel">未配置</span>
+        <span class="value">选择
+          <svg width="7" height="12" viewBox="0 0 8 14" fill="none">
+            <path d="M1 1l6 6-6 6" stroke="#bbb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="forum-edit-footer">
+    <button class="btn-delete-forum" id="btnDeleteForum" style="display:none;">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+        <path d="M4 6h12M8 6V5a2 2 0 012-2h0a2 2 0 012 2v1M15 6v9a3 3 0 01-3 3H8a3 3 0 01-3-3V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="btn-save" id="btnSaveForum">保存论坛</button>
+  </div>
+</div>
+
+<!-- ===== 论坛详情页 ===== -->
+<div class="forum-detail-page" id="forumDetailPage">
+  <div class="forum-detail-header">
+    <div class="forum-detail-header-top">
+      <button class="btn-back" id="btnBackFromForumDetail">
+        <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
+          <path d="M10 2L2 10l8 8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <h2 id="forumDetailTitle">论坛</h2>
+      <button class="btn-icon" id="btnEditCurrentForum" title="编辑论坛">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+          <path d="M14.5 3.5l2 2M3 14l9-9 2 2-9 9H3v-2z" stroke="var(--text-sub)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="forum-detail-banner">
+      <div class="forum-worldview" id="forumDetailWorldview"></div>
+    </div>
+  </div>
+  <div class="forum-detail-body" id="forumDetailBody">
+    <div class="forum-refresh-bar">
+      <button class="btn-refresh-forum" id="btnRefreshForum">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10a6 6 0 0110.5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M16 10a6 6 0 01-10.5 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M14 3v3h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 17v-3H3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        刷新帖子
+      </button>
+    </div>
+    <div id="forumPostList"></div>
+  </div>
+</div>
+
+<!-- ===== 论坛API选择页 ===== -->
+<div class="chat-api-page" id="forumApiPage" style="z-index:560;">
+  <div class="chat-settings-header">
+    <button class="btn-back" id="btnBackFromForumApi">
+      <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
+        <path d="M10 2L2 10l8 8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <h2>选择 API</h2>
+  </div>
+  <div class="chat-api-body">
+    <div class="api-saved-list" id="forumApiList"></div>
+  </div>
+</div>
 <!-- ===== 聊天室页面 ===== -->
 
 <div class="page-chat" id="pageChat">
@@ -3354,6 +4566,14 @@ body {
 
   <!-- 消息区域 -->
   <div class="chat-messages" id="chatMessages"></div>
+  <!-- 接收消息按钮 -->
+<button id="receiveMsgBtn" class="receive-msg-btn">
+  <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+    <path d="M10 3v10M6 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M3 17h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  接收消息
+</button>
 <!-- 重新回复按钮 -->
 <div id="regenerateBtn" class="regenerate-btn">
   <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
@@ -3567,7 +4787,31 @@ body {
     </div>
   </div>
 </div>
-
+<!-- ===== 聊天内 API 选择页 ===== -->
+<div class="chat-api-page" id="chatApiPage">
+  <div class="chat-settings-header">
+    <button class="btn-back" id="btnBackFromChatApi">
+      <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
+        <path d="M10 2L2 10l8 8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <h2>API 配置</h2></div>
+  <div class="chat-api-body">
+    <div class="chat-api-current">
+      <span class="current-label">当前使用</span>
+      <span class="current-value" id="chatApiCurrentName">未配置</span>
+      <span class="current-detail" id="chatApiCurrentDetail"></span>
+    </div>
+    <div class="settings-card-title" style="padding:8px 4px 0;">选择配置</div>
+    <div class="api-saved-list" id="chatApiList"></div>
+    <button class="btn-new-api" id="btnNewApiFromChat" type="button">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      新建 API 配置
+    </button>
+  </div>
+</div>
 <!-- ===== 聊天室内编辑角色弹窗 ===== -->
 <div class="chat-edit-overlay" id="chatEditOverlay">
   <div class="modal-card">
@@ -3621,7 +4865,43 @@ body {
     </div>
   </div>
 </div>
-
+<!-- ===== 聊天功能面板 ===== -->
+<div class="chat-func-panel" id="chatFuncPanel">
+  <div class="chat-func-header">
+    <h3>聊天功能</h3>
+    <button class="chat-func-close" id="btnCloseFuncPanel">
+      <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+        <path d="M1 1l12 12M13 1L1 13" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="chat-func-body">
+    <div class="func-btn-row" id="btnViewStatus">
+      <div class="func-btn-icon" style="background:linear-gradient(135deg,#e8f4f2,#d4ede9);">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <circle cx="10" cy="10" r="7" stroke="var(--accent)" stroke-width="1.5"/>
+          <path d="M10 6v4l3 2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="func-btn-info">
+        <div class="func-title">查看状态</div>
+        <div class="func-desc">看看对方现在在做什么、心情如何</div>
+      </div>
+    </div>
+    <div class="func-btn-row" id="btnStatusHistory">
+      <div class="func-btn-icon" style="background:linear-gradient(135deg,#f0f0ff,#e4e4f8);">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <rect x="3" y="3" width="14" height="14" rx="3" stroke="#7878c8" stroke-width="1.5"/>
+          <path d="M7 8h6M7 12h4" stroke="#7878c8" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="func-btn-info">
+        <div class="func-title">状态历史</div>
+        <div class="func-desc">查看之前保存的状态记录</div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ===== 聊天设置页面 ===== -->
 <div class="chat-settings-page" id="chatSettingsPage">
   <div class="chat-settings-header">
@@ -3840,43 +5120,7 @@ body {
   <div class="search-results" id="searchResults"><div class="search-empty">输入关键词搜索</div>
   </div>
 </div>
-<!-- ===== 聊天功能面板 ===== -->
-<div class="chat-func-panel" id="chatFuncPanel">
-  <div class="chat-func-header">
-    <h3>聊天功能</h3>
-    <button class="chat-func-close" id="btnCloseFuncPanel">
-      <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
-        <path d="M1 1l12 12M13 1L1 13" stroke="#999" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-  </div>
-  <div class="chat-func-body">
-    <div class="func-btn-row" id="btnViewStatus">
-      <div class="func-btn-icon" style="background:linear-gradient(135deg,#e8f4f2,#d4ede9);">
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-          <circle cx="10" cy="10" r="7" stroke="var(--accent)" stroke-width="1.5"/>
-          <path d="M10 6v4l3 2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="func-btn-info">
-        <div class="func-title">查看状态</div>
-        <div class="func-desc">看看对方现在在做什么、心情如何</div>
-      </div>
-    </div>
-    <div class="func-btn-row" id="btnStatusHistory">
-      <div class="func-btn-icon" style="background:linear-gradient(135deg,#f0f0ff,#e4e4f8);">
-        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-          <rect x="3" y="3" width="14" height="14" rx="3" stroke="#7878c8" stroke-width="1.5"/>
-          <path d="M7 8h6M7 12h4" stroke="#7878c8" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="func-btn-info">
-        <div class="func-title">状态历史</div>
-        <div class="func-desc">查看之前保存的状态记录</div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- ===== 状态卡片弹窗 ===== -->
 <div class="status-card-overlay" id="statusCardOverlay">
@@ -3898,6 +5142,8 @@ body {
     </div>
   </div>
 </div>
+
+
 <!-- ===== 面具管理弹窗 ===== -->
 <div class="modal-overlay" id="maskManagerModal">
   <div class="modal-card" style="max-height:85vh;">
@@ -4019,31 +5265,7 @@ body {
   <div class="status-history-body" id="statusHistoryBody"></div>
 </div>
 
-<!-- ===== 聊天内 API 选择页 ===== -->
-<div class="chat-api-page" id="chatApiPage">
-  <div class="chat-settings-header">
-    <button class="btn-back" id="btnBackFromChatApi">
-      <svg width="10" height="18" viewBox="0 0 12 20" fill="none">
-        <path d="M10 2L2 10l8 8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <h2>API 配置</h2></div>
-  <div class="chat-api-body">
-    <div class="chat-api-current">
-      <span class="current-label">当前使用</span>
-      <span class="current-value" id="chatApiCurrentName">未配置</span>
-      <span class="current-detail" id="chatApiCurrentDetail"></span>
-    </div>
-    <div class="settings-card-title" style="padding:8px 4px 0;">选择配置</div>
-    <div class="api-saved-list" id="chatApiList"></div>
-    <button class="btn-new-api" id="btnNewApiFromChat" type="button">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-        <path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      新建 API 配置
-    </button>
-  </div>
-</div>
+
 
 <script>
 // ========== 存储 - 使用 IndexedDB 替代 localStorage ==========
@@ -4104,6 +5326,15 @@ var maskEditGender = null;
 
 function saveMasks(cb) { dbSet('masks', masks, cb); }
 function saveCurrentMaskId(cb) { dbSet('currentMaskId', currentMaskId, cb); }
+// 论坛相关变量
+var forums = [];
+var currentForumId = null;
+var editingForumId = null;
+var forumSelectedMembers = new Set();
+var forumSelectedApiId = null;
+
+function saveForums(cb) { dbSet('forums', forums, cb); }
+
 function gid() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 6); }
 function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
@@ -4131,23 +5362,30 @@ function initApp() {
     masks = v || [];
     dbGet('currentMaskId', function(v2) {
       currentMaskId = v2 || null;
-      renderContactList();
-      renderMePage();
-      updateTime();
-      setInterval(updateTime, 10000);
+      dbGet('forums', function(v3) {
+        forums = v3 || [];
+        dbGet('moments', function(v4) {  // 添加这一层
+          moments = v4 || [];             // 添加这一行
+          renderContactList();
+          renderMePage();
+          updateTime();
+          setInterval(updateTime, 10000);
 
-      if (navigator.getBattery) {
-        navigator.getBattery().then(function(b) {
-          function u() {
-            document.getElementById('batteryPercent').textContent = Math.round(b.level * 100) + '%';
-            document.getElementById('batteryFill').setAttribute('width', Math.max(2, b.level * 20));
+          if (navigator.getBattery) {
+            navigator.getBattery().then(function(b) {
+              function u() {
+                document.getElementById('batteryPercent').textContent = Math.round(b.level * 100) + '%';
+                document.getElementById('batteryFill').setAttribute('width', Math.max(2, b.level * 20));
+              }
+              u(); b.addEventListener('levelchange', u);
+            });
           }
-          u(); b.addEventListener('levelchange', u);
-        });
-      }
+        });  // 添加这个闭合括号
+      });
     });
   });
 }
+
 
 
 // ========== 时间 ==========
@@ -4180,8 +5418,12 @@ document.getElementById('tabBar').addEventListener('click', function(e) {
   document.getElementById('chatListArea').style.display = tab === 'chat' ? 'block' : 'none';
   document.getElementById('pageMoments').style.display = tab === 'moments' ? 'flex' : 'none';
   document.getElementById('pageMoments').classList.toggle('active', tab === 'moments');
+  document.getElementById('pageDiscover').style.display = tab === 'discover' ? 'flex' : 'none';
+  document.getElementById('pageDiscover').classList.toggle('active', tab === 'discover');
   document.getElementById('pageMe').style.display = tab === 'me' ? 'flex' : 'none';
-  document.querySelector('.nav-bar .nav-title').textContent = tab === 'chat' ? '消息' : tab === 'moments' ? '朋友圈' : '我的';
+  
+  var titles = { chat: '消息', moments: '朋友圈', discover: '发现', me: '我的' };
+  document.querySelector('.nav-bar .nav-title').textContent = titles[tab] || '消息';
 
   document.getElementById('btnAddContact').style.display = tab === 'chat' ? 'flex' : 'none';
   document.getElementById('momentFab').classList.toggle('show', tab === 'moments');
@@ -4191,6 +5433,7 @@ document.getElementById('tabBar').addEventListener('click', function(e) {
     renderMoments();
   }
 });
+
 
 
 // ========== 渲染联系人列表 ==========
@@ -4819,6 +6062,7 @@ function openChat(id) {
   renderMessages(c);
   // 先隐藏重新回复按钮，等消息渲染后再判断
 document.getElementById('regenerateBtn').classList.remove('show');
+document.getElementById('receiveMsgBtn').classList.remove('show');
   document.getElementById('pageChat').classList.add('active');
   setTimeout(scrollToBottom, 100);
 }
@@ -5111,15 +6355,17 @@ document.getElementById('btnConfirmDelete').addEventListener('click', function()
 document.getElementById('btnExportData').addEventListener('click', function() {
   // 收集所有数据
   var exportObj = {
-    version: 1,
-    exportTime: Date.now(),
-    contacts: contacts,
-    apiConfigs: apiConfigs,
-    myProfile: myProfile,
-    moments: moments,
-    masks: masks,
-    currentMaskId: currentMaskId
-  };
+  version: 1,
+  exportTime: Date.now(),
+  contacts: contacts,
+  apiConfigs: apiConfigs,
+  myProfile: myProfile,
+  moments: moments,
+  masks: masks,
+  currentMaskId: currentMaskId,
+  forums: forums
+};
+
 
   var jsonStr = JSON.stringify(exportObj, null, 2);
   var blob = new Blob([jsonStr], { type: 'application/json' });
@@ -5144,6 +6390,1187 @@ document.getElementById('btnExportData').addEventListener('click', function() {
 
   alert('导出成功！');
 });
+// ========== 消息弹窗通知功能 ==========
+
+var notificationQueue = [];
+var isShowingNotification = false;
+
+// 显示通知
+function showNotification(options) {
+  /*
+    options: {
+      type: 'message' | 'moments' | 'forum',
+      avatar: '头像URL或null',
+      avatarText: '头像文字（无图片时显示）',
+      title: '标题（发送者名字）',
+      text: '内容预览',
+      appName: '应用名称',
+      onClick: 点击回调函数,
+      duration: 显示时长（毫秒，默认4000）
+    }
+  */
+  
+  notificationQueue.push(options);
+  processNotificationQueue();
+}
+
+function processNotificationQueue() {
+  if (isShowingNotification || notificationQueue.length === 0) return;
+  
+  isShowingNotification = true;
+  var options = notificationQueue.shift();
+  
+  var container = document.getElementById('notificationContainer');
+  
+  // 创建通知元素
+  var toast = document.createElement('div');
+  toast.className = 'notification-toast type-' + (options.type || 'message');
+  
+  // 头像
+  var avatarContent = options.avatar 
+    ? '<img src="' + options.avatar + '">' 
+    : esc(options.avatarText || '?');
+  
+  // 图标
+  var iconClass = options.type === 'moments' ? 'moments' : (options.type === 'forum' ? 'forum' : '');
+  var iconEmoji = options.type === 'moments' ? '📷' : (options.type === 'forum' ? '📋' : '💬');
+  
+  // 应用名称
+  var appName = options.appName || (options.type === 'moments' ? '朋友圈' : (options.type === 'forum' ? '论坛' : '消息'));
+  
+  toast.innerHTML = 
+    '<div class="notification-avatar">' + avatarContent + 
+    '<div class="notif-icon ' + iconClass + '">' + iconEmoji + '</div></div>' +
+    '<div class="notification-body">' +
+    '<div class="notification-header">' +
+    '<span class="notification-app">' + esc(appName) + '</span>' +
+    '<span class="notification-time">现在</span>' +
+    '</div>' +
+    '<div class="notification-title">' + esc(options.title || '新消息') + '</div>' +
+    '<div class="notification-text">' + esc(options.text || '') + '</div>' +
+    '</div>' +
+    '<button class="notification-close">' +
+    '<svg width="10" height="10" viewBox="0 0 14 14" fill="none">' +
+    '<path d="M1 1l12 12M13 1L1 13" stroke="#999" stroke-width="2" stroke-linecap="round"/>' +
+    '</svg></button>' +
+    '<div class="notification-progress"></div>';
+  
+  container.appendChild(toast);
+  
+  // 触发显示动画
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      toast.classList.add('show');
+      
+      // 播放声音（可选，需要用户交互后才能播放）
+      // playNotificationSound();
+      
+      // 振动（如果支持）
+      if (navigator.vibrate) {
+        navigator.vibrate([50, 30, 50]);
+      }
+    });
+  });
+  
+  var duration = options.duration || 4000;
+  var hideTimeout;
+  
+  // 点击通知
+  toast.addEventListener('click', function(e) {
+    if (e.target.closest('.notification-close')) {
+      // 点击关闭按钮
+      hideNotification();
+    } else {
+      // 点击通知主体
+      hideNotification();
+      if (options.onClick) {
+        setTimeout(options.onClick, 300);
+      }
+    }
+  });
+  
+  // 自动隐藏
+  hideTimeout = setTimeout(hideNotification, duration);
+  
+  function hideNotification() {
+    clearTimeout(hideTimeout);
+    toast.classList.remove('show');
+    toast.classList.add('hiding');
+    
+    setTimeout(function() {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+      isShowingNotification = false;
+      processNotificationQueue();
+    }, 300);
+  }
+}
+
+// 消息通知（角色发消息）
+function notifyNewMessage(contact, messageText) {
+  // 如果当前正在和这个角色聊天，不显示通知
+  if (currentChatId === contact.id && document.getElementById('pageChat').classList.contains('active')) {
+    return;
+  }
+  
+  showNotification({
+    type: 'message',
+    avatar: contact.avatar,
+    avatarText: (contact.remark || contact.name).charAt(0),
+    title: contact.remark || contact.name,
+    text: messageText.length > 50 ? messageText.substring(0, 50) + '...' : messageText,
+    onClick: function() {
+      // 点击打开聊天
+      openChat(contact.id);
+    }
+  });
+}
+
+// 朋友圈通知
+function notifyMoments(contact, action, content) {
+  // action: 'post' | 'like' | 'comment'
+  var text = '';
+  var title = contact.remark || contact.name;
+  
+  if (action === 'post') {
+    text = '发布了新动态：' + (content.length > 30 ? content.substring(0, 30) + '...' : content);
+  } else if (action === 'like') {
+    text = '赞了你的朋友圈';
+  } else if (action === 'comment') {
+    text = '评论了：' + (content.length > 30 ? content.substring(0, 30) + '...' : content);
+  }
+  
+  showNotification({
+    type: 'moments',
+    avatar: contact.avatar,
+    avatarText: title.charAt(0),
+    title: title,
+    text: text,
+    onClick: function() {
+      // 点击跳转到朋友圈
+      document.querySelectorAll('.tab-item').forEach(function(el) { el.classList.remove('active'); });
+      document.querySelector('[data-tab="moments"]').classList.add('active');
+      document.getElementById('chatListArea').style.display = 'none';
+      document.getElementById('pageDiscover').style.display = 'none';
+      document.getElementById('pageMe').style.display = 'none';
+      document.getElementById('pageMoments').style.display = 'flex';
+      document.getElementById('pageMoments').classList.add('active');
+      document.querySelector('.nav-bar .nav-title').textContent = '朋友圈';
+      document.getElementById('btnAddContact').style.display = 'none';
+      document.getElementById('momentFab').classList.add('show');
+      renderMomentsHeader();
+      renderMoments();
+    }
+  });
+}
+
+// 论坛通知
+function notifyForum(forumName, authorName, content) {
+  showNotification({
+    type: 'forum',
+    avatar: null,
+    avatarText: forumName.charAt(0),
+    appName: forumName,
+    title: authorName + ' 发布了新帖子',
+    text: content.length > 40 ? content.substring(0, 40) + '...' : content,
+    onClick: function() {
+      // 点击跳转到发现页
+      document.querySelectorAll('.tab-item').forEach(function(el) { el.classList.remove('active'); });
+      document.querySelector('[data-tab="discover"]').classList.add('active');
+      document.getElementById('chatListArea').style.display = 'none';
+      document.getElementById('pageMoments').style.display = 'none';
+      document.getElementById('pageMe').style.display = 'none';
+      document.getElementById('pageDiscover').style.display = 'flex';
+      document.getElementById('pageDiscover').classList.add('active');
+      document.querySelector('.nav-bar .nav-title').textContent = '发现';
+      document.getElementById('btnAddContact').style.display = 'none';
+      document.getElementById('momentFab').classList.remove('show');
+    }
+  });
+}
+
+// ========== 论坛功能 ==========
+
+// 进入论坛列表页
+document.getElementById('btnEnterForum').addEventListener('click', function() {
+  renderForumList();
+  document.getElementById('forumPage').classList.add('active');
+});
+
+// 返回发现页
+document.getElementById('btnBackFromForum').addEventListener('click', function() {
+  document.getElementById('forumPage').classList.remove('active');
+});
+
+// 渲染论坛列表
+function renderForumList() {
+  var list = document.getElementById('forumList');
+  var empty = document.getElementById('forumEmpty');
+  
+  if (forums.length === 0) {
+    empty.style.display = 'flex';
+    list.innerHTML = '';
+    return;
+  }
+  
+  empty.style.display = 'none';
+  list.innerHTML = forums.map(function(f) {
+    var memberAvatars = '';
+    var memberCount = f.members ? f.members.length : 0;
+    if (f.members) {
+      f.members.slice(0, 4).forEach(function(mid) {
+        var c = getContact(mid);
+        if (c) {
+          var av = c.avatar ? '<img src="' + c.avatar + '">' : esc(c.name.charAt(0));
+          memberAvatars += '<div class="member-avatar">' + av + '</div>';
+        }
+      });
+    }
+    var moreText = memberCount > 4 ? '<span class="member-more">+' + (memberCount - 4) + '</span>' : '';
+    var postCount = f.posts ? f.posts.length : 0;
+    
+    return '<div class="forum-card" data-fid="' + f.id + '">' +
+      '<div class="forum-card-banner"></div>' +
+      '<div class="forum-card-content">' +
+      '<div class="forum-card-title"><span class="forum-icon">' + (f.icon || '📋') + '</span>' + esc(f.name) + '</div>' +
+      '<div class="forum-card-desc">' + esc(f.worldview || '暂无世界观设定') + '</div>' +
+      '<div class="forum-card-meta">' +
+      '<span>📝 ' + postCount + ' 帖子</span>' +
+      '<span>👥 ' + memberCount + ' 成员</span>' +
+      '</div>' +
+      '<div class="forum-card-members">' + memberAvatars + moreText + '</div>' +
+      '</div></div>';
+  }).join('');
+  
+  // 绑定点击事件
+  list.querySelectorAll('.forum-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var fid = card.getAttribute('data-fid');
+      openForumDetail(fid);
+    });
+  });
+}
+
+// 创建论坛
+document.getElementById('btnCreateForum').addEventListener('click', function() {
+  openForumEditor(null);
+});
+
+// 打开论坛编辑器
+function openForumEditor(id) {
+  editingForumId = id;
+  forumSelectedMembers = new Set();
+  forumSelectedApiId = null;
+  
+  if (id) {
+    var f = forums.find(function(x) { return x.id === id; });
+    if (f) {
+      document.getElementById('forumEditTitle').textContent = '编辑论坛';
+      document.getElementById('forumEditName').value = f.name || '';
+      document.getElementById('forumEditIcon').value = f.icon || '';
+      document.getElementById('forumEditWorldview').value = f.worldview || '';
+      forumSelectedApiId = f.apiId;
+      if (f.members) {
+        f.members.forEach(function(mid) { forumSelectedMembers.add(mid); });
+      }
+      document.getElementById('btnDeleteForum').style.display = 'flex';
+    }
+  } else {
+    document.getElementById('forumEditTitle').textContent = '创建论坛';
+    document.getElementById('forumEditName').value = '';
+    document.getElementById('forumEditIcon').value = '';
+    document.getElementById('forumEditWorldview').value = '';
+    document.getElementById('btnDeleteForum').style.display = 'none';
+  }
+  
+  // 更新API显示
+  var apiCfg = forumSelectedApiId ? apiConfigs.find(function(a) { return a.id === forumSelectedApiId; }) : null;
+  document.getElementById('forumSelectedApiLabel').textContent = apiCfg ? apiCfg.name : '未配置';
+  
+  renderForumMemberSelector();
+  document.getElementById('forumEditPage').classList.add('active');
+}
+
+// 渲染成员选择器
+function renderForumMemberSelector() {
+  var list = document.getElementById('forumMemberList');
+  
+  if (contacts.length === 0) {
+    list.innerHTML = '<div style="font-size:12px;color:var(--text-hint);padding:10px;">还没有联系人，请先添加角色</div>';
+    return;
+  }
+  
+  list.innerHTML = contacts.map(function(c) {
+    var selected = forumSelectedMembers.has(c.id);
+    var av = c.avatar ? '<img src="' + c.avatar + '">' : esc(c.name.charAt(0));
+    return '<div class="member-chip' + (selected ? ' selected' : '') + '" data-mid="' + c.id + '">' +
+      '<div class="member-chip-avatar">' + av + '</div>' +
+      '<span class="member-chip-name">' + esc(c.remark || c.name) + '</span>' +
+      '</div>';
+  }).join('');
+  
+  list.querySelectorAll('.member-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      var mid = chip.getAttribute('data-mid');
+      if (forumSelectedMembers.has(mid)) {
+        forumSelectedMembers.delete(mid);
+        chip.classList.remove('selected');
+      } else {
+        forumSelectedMembers.add(mid);
+        chip.classList.add('selected');
+      }
+    });
+  });
+}
+
+// 返回论坛列表
+document.getElementById('btnBackFromForumEdit').addEventListener('click', function() {
+  document.getElementById('forumEditPage').classList.remove('active');
+});
+
+// 论坛API选择
+document.getElementById('btnForumApiSelect').addEventListener('click', function() {
+  renderForumApiList();
+  document.getElementById('forumApiPage').classList.add('active');
+});
+
+document.getElementById('btnBackFromForumApi').addEventListener('click', function() {
+  document.getElementById('forumApiPage').classList.remove('active');
+});
+
+function renderForumApiList() {
+  var list = document.getElementById('forumApiList');
+  
+  if (apiConfigs.length === 0) {
+    list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-hint);font-size:13px;">还没有 API 配置</div>';
+    return;
+  }
+  
+  list.innerHTML = apiConfigs.map(function(cfg) {
+    var sel = cfg.id === forumSelectedApiId;
+    return '<div class="api-saved-item' + (sel ? ' selected' : '') + '" data-id="' + cfg.id + '">' +
+      '<div class="api-item-radio"></div>' +
+      '<div class="api-item-info">' +
+      '<div class="api-item-name">' + esc(cfg.name) + '</div>' +
+      '<div class="api-item-detail">' + esc(cfg.format.toUpperCase() + ' · ' + cfg.model) + '</div>' +
+      '</div></div>';
+  }).join('');
+  
+  list.querySelectorAll('.api-saved-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      forumSelectedApiId = item.getAttribute('data-id');
+      var cfg = apiConfigs.find(function(c) { return c.id === forumSelectedApiId; });
+      document.getElementById('forumSelectedApiLabel').textContent = cfg ? cfg.name : '未配置';
+      document.getElementById('forumApiPage').classList.remove('active');
+    });
+  });
+}
+
+// 保存论坛
+document.getElementById('btnSaveForum').addEventListener('click', function() {
+  var name = document.getElementById('forumEditName').value.trim();
+  var icon = document.getElementById('forumEditIcon').value.trim();
+  var worldview = document.getElementById('forumEditWorldview').value.trim();
+  
+  if (!name) {
+    alert('请输入论坛名称');
+    return;
+  }
+  
+  if (forumSelectedMembers.size === 0) {
+    alert('请至少选择一个成员');
+    return;
+  }
+  
+  if (!forumSelectedApiId) {
+    alert('请选择 API 配置');
+    return;
+  }
+  
+  if (editingForumId) {
+    // 编辑现有论坛
+    var idx = forums.findIndex(function(f) { return f.id === editingForumId; });
+    if (idx !== -1) {
+      forums[idx].name = name;
+      forums[idx].icon = icon || '📋';
+      forums[idx].worldview = worldview;
+      forums[idx].members = Array.from(forumSelectedMembers);
+      forums[idx].apiId = forumSelectedApiId;
+    }
+  } else {
+    // 创建新论坛
+    forums.push({
+      id: gid(),
+      name: name,
+      icon: icon || '📋',
+      worldview: worldview,
+      members: Array.from(forumSelectedMembers),
+      apiId: forumSelectedApiId,
+      posts: [],
+      createdAt: Date.now()
+    });
+  }
+  
+  saveForums();
+  document.getElementById('forumEditPage').classList.remove('active');
+  renderForumList();
+});
+
+// 删除论坛
+document.getElementById('btnDeleteForum').addEventListener('click', function() {
+  if (!editingForumId) return;
+  if (!confirm('确定要删除这个论坛吗？所有帖子都会被删除。')) return;
+  
+  forums = forums.filter(function(f) { return f.id !== editingForumId; });
+  saveForums();
+  document.getElementById('forumEditPage').classList.remove('active');
+  renderForumList();
+});
+
+// ========== 论坛详情页 ==========
+
+function openForumDetail(fid) {
+  currentForumId = fid;
+  var f = forums.find(function(x) { return x.id === fid; });
+  if (!f) return;
+  
+  document.getElementById('forumDetailTitle').textContent = (f.icon || '📋') + ' ' + f.name;
+  document.getElementById('forumDetailWorldview').textContent = f.worldview || '暂无世界观设定';
+  
+  renderForumPosts(f);
+  document.getElementById('forumDetailPage').classList.add('active');
+}
+
+document.getElementById('btnBackFromForumDetail').addEventListener('click', function() {
+  document.getElementById('forumDetailPage').classList.remove('active');
+  currentForumId = null;
+});
+
+// 编辑当前论坛
+document.getElementById('btnEditCurrentForum').addEventListener('click', function() {
+  if (currentForumId) {
+    openForumEditor(currentForumId);
+  }
+});
+
+// 渲染帖子列表
+function renderForumPosts(forum) {
+  var list = document.getElementById('forumPostList');
+  
+  if (!forum.posts || forum.posts.length === 0) {
+    list.innerHTML = '<div class="forum-empty" style="padding:40px 20px;">' +
+      '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="28" rx="4" stroke="#ccc" stroke-width="1.5"/><path d="M14 20h20M14 28h12" stroke="#ccc" stroke-width="1.5" stroke-linecap="round"/></svg>' +
+      '<p>还没有帖子<br>点击上方刷新按钮生成帖子</p></div>';
+    return;
+  }
+  
+  // 获取用户面具信息
+  var userMask = getCurrentMask() || {
+    nickname: myProfile.name,
+    avatar: myProfile.avatar
+  };
+  var userName = userMask.nickname || myProfile.name || '我';
+  var userAvatar = userMask.avatar || myProfile.avatar;
+  
+  list.innerHTML = forum.posts.map(function(post) {
+    var authorName, authorAvatar, authorTag, isContact = false;
+    
+    if (post.authorType === 'contact') {
+      var c = getContact(post.authorId);
+      authorName = c ? (c.remark || c.name) : '未知';
+      authorAvatar = c && c.avatar ? '<img src="' + c.avatar + '">' : esc(authorName.charAt(0));
+      authorTag = '<span class="author-tag">成员</span>';
+      isContact = true;
+    } else if (post.authorType === 'me') {
+      authorName = userName;
+      authorAvatar = userAvatar ? '<img src="' + userAvatar + '">' : esc(userName.charAt(0));
+      authorTag = '<span class="author-tag">我</span>';
+    } else {
+      // 网友
+      authorName = post.authorName || '匿名网友';
+      authorAvatar = esc(authorName.charAt(0));
+      authorTag = '<span class="author-tag netizen">网友</span>';
+    }
+    
+    // 点赞状态
+    var iLiked = post.likes && post.likes.indexOf('me') !== -1;
+    var likeCount = post.likes ? post.likes.length : 0;
+    var commentCount = post.comments ? post.comments.length : 0;
+    
+    // 帖子内容
+    var contentHtml = '';
+    if (post.title) {
+      contentHtml += '<div class="post-title">' + esc(post.title) + '</div>';
+    }
+    contentHtml += esc(post.content);
+    
+    // 评论
+    var commentsHtml = '';
+    if (post.comments && post.comments.length > 0) {
+      commentsHtml = '<div class="post-comments">';
+      post.comments.forEach(function(cm) {
+        var cmName, cmAvatar;
+        if (cm.authorType === 'me') {
+          cmName = userName;
+          cmAvatar = userAvatar ? '<img src="' + userAvatar + '">' : esc(userName.charAt(0));
+        } else if (cm.authorType === 'contact') {
+          var cc = getContact(cm.authorId);
+          cmName = cc ? (cc.remark || cc.name) : '未知';
+          cmAvatar = cc && cc.avatar ? '<img src="' + cc.avatar + '">' : esc(cmName.charAt(0));
+        } else {
+          cmName = cm.authorName || '网友';
+          cmAvatar = esc(cmName.charAt(0));
+        }
+        
+        var replyStr = '';
+        if (cm.replyTo) {
+          replyStr = '<span class="reply-to"> 回复 ' + esc(cm.replyToName || '某人') + '</span>';
+        }
+        
+        commentsHtml += '<div class="post-comment">' +
+          '<div class="post-comment-avatar">' + cmAvatar + '</div>' +
+          '<div class="post-comment-body">' +
+          '<div class="post-comment-author">' + esc(cmName) + replyStr + '</div>' +
+          '<div class="post-comment-text">' + esc(cm.text) + '</div>' +
+          '<div class="post-comment-time">' + getTimeAgo(cm.ts) + '</div>' +
+          '</div></div>';
+      });
+      commentsHtml += '</div>';
+    }
+    
+    return '<div class="post-card" data-pid="' + post.id + '">' +
+      '<div class="post-header">' +
+      '<div class="post-avatar">' + authorAvatar + '</div>' +
+      '<div class="post-author-info">' +
+      '<div class="post-author-name">' + esc(authorName) + ' ' + authorTag + '</div>' +
+      '<div class="post-time">' + getTimeAgo(post.ts) + '</div>' +
+      '</div></div>' +
+      '<div class="post-content">' + contentHtml + '</div>' +
+      '<div class="post-actions">' +
+      '<div class="post-action-btn ' + (iLiked ? 'liked' : '') + '" data-action="like" data-pid="' + post.id + '">' + (iLiked ? '❤️' : '🤍') + ' ' + (likeCount || '赞') + '</div>' +
+      '<div class="post-action-btn" data-action="comment" data-pid="' + post.id + '">💬 ' + (commentCount || '评论') + '</div>' +
+      '</div>' +
+      commentsHtml +
+      '<div class="post-comment-input" id="commentInput_' + post.id + '">' +
+      '<input type="text" placeholder="写评论..." maxlength="200" id="commentText_' + post.id + '">' +
+      '<button data-pid="' + post.id + '" class="btn-submit-post-comment">发送</button>' +
+      '</div></div>';
+  }).join('');
+  
+  // 绑定点赞事件
+  list.querySelectorAll('[data-action="like"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pid = btn.getAttribute('data-pid');
+      var post = forum.posts.find(function(p) { return p.id === pid; });
+      if (!post) return;
+      
+      if (!post.likes) post.likes = [];
+      var idx = post.likes.indexOf('me');
+      if (idx !== -1) {
+        post.likes.splice(idx, 1);
+      } else {
+        post.likes.push('me');
+      }
+      saveForums();
+      renderForumPosts(forum);
+    });
+  });
+  
+  // 绑定评论按钮
+  list.querySelectorAll('[data-action="comment"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pid = btn.getAttribute('data-pid');
+      var inputWrap = document.getElementById('commentInput_' + pid);
+      inputWrap.classList.toggle('show');
+      if (inputWrap.classList.contains('show')) {
+        document.getElementById('commentText_' + pid).focus();
+      }
+    });
+  });
+  
+  // 绑定发送评论
+  list.querySelectorAll('.btn-submit-post-comment').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pid = btn.getAttribute('data-pid');
+      var input = document.getElementById('commentText_' + pid);
+      var text = input.value.trim();
+      if (!text) return;
+      
+      var post = forum.posts.find(function(p) { return p.id === pid; });
+      if (!post) return;
+      
+      if (!post.comments) post.comments = [];
+      post.comments.push({
+        id: gid(),
+        authorType: 'me',
+        text: text,
+        ts: Date.now()
+      });
+      
+      saveForums();
+      input.value = '';
+      renderForumPosts(forum);
+      
+      // 触发AI回复
+      triggerForumCommentReply(forum, post, text);
+    });
+  });
+}
+
+// ========== 刷新/生成帖子 ==========
+
+document.getElementById('btnRefreshForum').addEventListener('click', function() {
+  var f = forums.find(function(x) { return x.id === currentForumId; });
+  if (!f) return;
+  
+  var btn = document.getElementById('btnRefreshForum');
+  if (btn.classList.contains('loading')) return;
+  
+  btn.classList.add('loading');
+  btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;border-width:2px;"></div> 生成中...';
+  
+  generateForumPosts(f, function() {
+    btn.classList.remove('loading');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 10a6 6 0 0110.5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 10a6 6 0 01-10.5 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M14 3v3h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 17v-3H3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 刷新帖子';
+    renderForumPosts(f);
+  });
+});
+
+// 生成论坛帖子
+function generateForumPosts(forum, callback) {
+  var apiCfg = apiConfigs.find(function(a) { return a.id === forum.apiId; });
+  if (!apiCfg) {
+    alert('论坛未配置 API');
+    if (callback) callback();
+    return;
+  }
+  
+  // 获取用户信息
+  var userMask = getCurrentMask() || {
+    nickname: myProfile.name,
+    gender: myProfile.gender,
+    persona: myProfile.persona
+  };
+  var userName = userMask.nickname || myProfile.name || '用户';
+  
+  // 构建成员信息
+  var membersInfo = '';
+  forum.members.forEach(function(mid) {
+    var c = getContact(mid);
+    if (c) {
+      membersInfo += '\n- ' + c.name;
+      if (c.gender) {
+        var gm = { male: '(男)', female: '(女)', other: '' };
+        membersInfo += gm[c.gender] || '';
+      }
+      if (c.persona) {
+        membersInfo += '：' + c.persona.substring(0, 100);
+      }
+    }
+  });
+  
+  // 构建提示词
+  var prompt = '你是一个论坛内容生成器。请根据以下设定生成真实、有沉浸感的论坛帖子。\n\n';
+  
+  prompt += '【论坛名称】\n' + forum.name + '\n\n';
+  
+  prompt += '【世界观设定】\n' + (forum.worldview || '现实世界') + '\n\n';
+  
+  prompt += '【论坛成员（可能会发帖的角色）】' + membersInfo + '\n\n';
+  
+  prompt += '【用户信息（论坛的浏览者）】\n';
+  prompt += '名字：' + userName + '\n';
+  if (userMask.gender) {
+    var gm2 = { male: '男', female: '女', other: '其他' };
+    prompt += '性别：' + (gm2[userMask.gender] || '') + '\n';
+  }
+  if (userMask.persona) {
+    prompt += '简介：' + userMask.persona.substring(0, 100) + '\n';
+  }
+  prompt += '\n';
+  
+  // 当前时间
+  var now = new Date();
+  var weekDays = ['日', '一', '二', '三', '四', '五', '六'];
+  prompt += '【当前时间】\n';
+  prompt += now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ';
+  prompt += '星期' + weekDays[now.getDay()] + ' ' + now.getHours() + ':' + now.getMinutes().toString().padStart(2, '0') + '\n\n';
+  
+  prompt += '【生成要求】\n';
+  prompt += '1. 生成5-8条论坛帖子，用JSON数组格式返回\n';
+  prompt += '2. 帖子类型要多样：日常分享、提问、讨论、吐槽、新闻、攻略等\n';
+  prompt += '3. 部分帖子由论坛成员发布（authorType: "contact", authorId: "成员ID"）\n';
+  prompt += '4. 部分帖子由随机网友发布（authorType: "netizen", authorName: "网友昵称"）\n';
+  prompt += '5. 成员发帖必须符合其人设，比如明星不会随便发普通帖子\n';
+  prompt += '6. 网友昵称要有趣、符合网络风格，如"今天也要加油鸭"、"深夜食堂老板"\n';
+  prompt += '7. 帖子内容要符合世界观设定，有沉浸感\n';
+  prompt += '8. 可以有1-3条评论，评论者可以是成员或网友\n';
+  prompt += '9. 内容要像真实论坛，有网络用语、表情、口语化表达\n\n';
+  
+  prompt += '【返回格式】\n';
+  prompt += '严格返回JSON数组，不要有其他内容：\n';
+  prompt += '[\n';
+  prompt += '  {\n';
+  prompt += '    "authorType": "contact" 或 "netizen",\n';
+  prompt += '    "authorId": "成员ID（仅contact类型需要）",\n';
+  prompt += '    "authorName": "网友昵称（仅netizen类型需要）",\n';
+  prompt += '    "title": "帖子标题（可选）",\n';
+  prompt += '    "content": "帖子内容",\n';
+  prompt += '    "comments": [\n';
+  prompt += '      {\n';
+  prompt += '        "authorType": "contact" 或 "netizen",\n';
+  prompt += '        "authorId": "成员ID（可选）",\n';
+  prompt += '        "authorName": "评论者昵称",\n';
+  prompt += '        "text": "评论内容"\n';
+  prompt += '      }\n';
+  prompt += '    ]\n';
+  prompt += '  }\n';
+  prompt += ']\n\n';
+  
+  prompt += '【论坛成员ID对照】\n';
+  forum.members.forEach(function(mid) {
+    var c = getContact(mid);
+    if (c) {
+      prompt += c.name + ' 的ID是: ' + mid + '\n';
+    }
+  });
+  
+  if (apiCfg.format === 'openai') {
+    var url = apiCfg.base.replace(/\/+$/, '');
+    url = url.endsWith('/v1') ? url + '/chat/completions' : url + '/v1/chat/completions';
+    
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiCfg.key },
+      body: JSON.stringify({
+        model: apiCfg.model,
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 2500
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var text = '';
+      if (data.choices && data.choices[0]) {
+        text = data.choices[0].message.content;
+      }
+      parseAndAddPosts(forum, text);
+      if (callback) callback();
+    })
+    .catch(function(err) {
+      console.error('生成帖子失败:', err);
+      alert('生成失败，请重试');
+      if (callback) callback();
+    });
+  } else {
+    var url2 = apiCfg.base.replace(/\/+$/, '') + '/v1beta/models/' + apiCfg.model + ':generateContent?key=' + apiCfg.key;
+    
+    fetch(url2, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { maxOutputTokens:2500 }
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var text = '';
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        text = data.candidates[0].content.parts.map(function(p) { return p.text; }).join('');
+      }
+      parseAndAddPosts(forum, text);
+      if (callback) callback();
+    })
+    .catch(function(err) {
+      console.error('生成帖子失败:', err);
+      alert('生成失败，请重试');
+      if (callback) callback();
+    });
+  }
+}
+
+// 解析并添加帖子
+function parseAndAddPosts(forum, text) {
+  try {
+    // 尝试提取JSON
+    var jsonMatch = text.match(/\[[\s\S]*\]/);
+    if (!jsonMatch) {
+      console.error('未找到JSON数组');
+      return;
+    }
+    
+    var posts = JSON.parse(jsonMatch[0]);
+    if (!Array.isArray(posts)) return;
+    
+    var now = Date.now();
+    posts.forEach(function(post, index) {
+      // 为每个帖子生成唯一ID和时间戳（模拟不同时间发布）
+      var newPost = {
+        id: gid(),
+        authorType: post.authorType || 'netizen',
+        authorId: post.authorId || null,
+        authorName: post.authorName || '匿名网友',
+        title: post.title || '',
+        content: post.content || '',
+        ts: now - (posts.length - index) * 60000 * Math.floor(Math.random() * 30 + 5), // 随机时间间隔
+        likes: [],
+        comments: []
+      };
+      
+      // 处理评论
+      if (post.comments && Array.isArray(post.comments)) {
+        post.comments.forEach(function(cm) {
+          newPost.comments.push({
+            id: gid(),
+            authorType: cm.authorType || 'netizen',
+            authorId: cm.authorId || null,
+            authorName: cm.authorName || '网友',
+            text: cm.text || '',
+            ts: newPost.ts + Math.floor(Math.random() * 600000) // 评论时间在帖子之后
+          });
+        });
+      }
+      
+      forum.posts.unshift(newPost); // 新帖子放在前面
+    });
+    
+    // 限制帖子数量，保留最新的50条
+    if (forum.posts.length > 50) {
+      forum.posts = forum.posts.slice(0, 50);
+    }
+    
+    saveForums();
+  } catch (e) {
+    console.error('解析帖子失败:', e);
+  }
+}
+
+// ========== 论坛评论AI回复 ==========
+
+function triggerForumCommentReply(forum, post, myText) {
+  // 决定谁来回复
+  var responders = [];
+  
+  // 如果帖子作者是成员，有较高概率回复
+  if (post.authorType === 'contact' && post.authorId) {
+    var author = getContact(post.authorId);
+    if (author) {
+      // 根据人设判断是否会回复
+      var willReply = shouldCharacterReply(author, myText);
+      if (willReply) {
+        responders.push({ type: 'contact', contact: author, isAuthor: true });
+      }
+    }
+  }
+  
+  // 随机决定是否有网友回复（30%概率）
+  if (Math.random() < 0.3) {
+    responders.push({ type: 'netizen' });
+  }
+  
+  // 随机决定是否有其他成员回复（20%概率）
+  if (Math.random() < 0.2 && forum.members.length > 1) {
+    var otherMembers = forum.members.filter(function(mid) {
+      return mid !== post.authorId;
+    });
+    if (otherMembers.length > 0) {
+      var randomMid = otherMembers[Math.floor(Math.random() * otherMembers.length)];
+      var randomMember = getContact(randomMid);
+      if (randomMember && shouldCharacterReply(randomMember, myText)) {
+        responders.push({ type: 'contact', contact: randomMember, isAuthor: false });
+      }
+    }
+  }
+  
+  // 依次触发回复
+  responders.forEach(function(responder, index) {
+    setTimeout(function() {
+      if (responder.type === 'contact') {
+        generateForumCharacterReply(forum, post, responder.contact, myText, responder.isAuthor);
+      } else {
+        generateForumNetizenReply(forum, post, myText);
+      }
+    }, (index + 1) * (2000 + Math.random() * 3000));
+  });
+}
+
+// 判断角色是否会回复（根据人设）
+function shouldCharacterReply(contact, commentText) {
+  if (!contact.persona) return true;
+  
+  var persona = contact.persona.toLowerCase();
+  
+  // 明星、名人等通常不会随便回复
+  if (persona.includes('明星') || persona.includes('偶像') || persona.includes('艺人') || 
+      persona.includes('名人') || persona.includes('公众人物')) {
+    // 只有10%概率回复
+    return Math.random() < 0.1;
+  }
+  
+  // 高冷、冷漠等性格回复概率较低
+  if (persona.includes('高冷') || persona.includes('冷漠') || persona.includes('话少')) {
+    return Math.random() < 0.4;
+  }
+  
+  // 热情、话多等性格回复概率较高
+  if (persona.includes('热情') || persona.includes('话多') || persona.includes('活泼') || persona.includes('开朗')) {
+    return Math.random() < 0.9;
+  }
+  
+  // 默认70%概率回复
+  return Math.random() < 0.7;
+}
+
+// 生成角色回复
+function generateForumCharacterReply(forum, post, contact, myText, isAuthor) {
+  var apiCfg = apiConfigs.find(function(a) { return a.id === forum.apiId; });
+  if (!apiCfg) return;
+  
+  // 获取用户信息
+  var userMask = getMaskForContact(contact);
+  var userName = userMask.nickname || myProfile.name || '用户';
+  
+  var prompt = '你正在扮演"' + contact.name + '"在论坛回复评论。\n\n';
+  
+  prompt += '【你的人设】\n';
+  if (contact.persona) prompt += contact.persona + '\n';
+  if (contact.gender) {
+    var gm = { male: '男性', female: '女性', other: '其他' };
+    prompt += '性别：' + (gm[contact.gender] || '') + '\n';
+  }
+  prompt += '\n';
+  
+  prompt += '【论坛世界观】\n' + (forum.worldview || '现实世界') + '\n\n';
+  
+  prompt += '【评论者信息】\n';
+  prompt += '名字：' + userName + '\n';
+  if (userMask.persona) prompt += '简介：' + userMask.persona.substring(0, 80) + '\n';
+  prompt += '\n';
+  
+  // 聊天记录参考
+  if (contact.messages && contact.messages.length > 0) {
+    var recentMsgs = contact.messages.slice(-8);
+    prompt += '【你和' + userName + '的私聊记录（了解你们的关系）】\n';
+    recentMsgs.forEach(function(msg) {
+      var sender = msg.role === 'user' ? userName : '你';
+      prompt += sender + '：' + msg.text.substring(0, 40) + '\n';
+    });
+    prompt += '\n';
+  }
+  
+  prompt += '【帖子内容】\n';
+  if (post.title) prompt += '标题：' + post.title + '\n';
+  prompt += '内容：' + post.content.substring(0, 200) + '\n';
+  prompt += '发帖人：' + (isAuthor ? '你自己' : '其他人') + '\n\n';
+  
+  // 已有评论
+  if (post.comments && post.comments.length > 0) {
+    prompt += '【已有评论】\n';
+    post.comments.slice(-5).forEach(function(cm) {
+      var cmName = cm.authorType === 'me' ? userName : (cm.authorName || '网友');
+      prompt += cmName + '：' + cm.text + '\n';
+    });
+    prompt += '\n';
+  }
+  
+  prompt += '【' + userName + '刚刚评论说】\n"' + myText + '"\n\n';
+  
+  prompt += '【回复要求】\n';
+  prompt += '- 只写你的回复内容，不要加任何前缀\n';
+  prompt += '- 符合你的人设和性格\n';
+  prompt += '- 像真人在论坛回复一样，简短自然\n';
+  prompt += '- 可以用网络用语和表情\n';
+  if (isAuthor) {
+    prompt += '- 这是你自己的帖子，以帖主身份回复\n';
+  }
+  
+  callForumApi(apiCfg, prompt, function(reply) {
+    if (reply) {
+      post.comments.push({
+        id: gid(),
+        authorType: 'contact',
+        authorId: contact.id,
+        text: reply,
+        replyTo: 'me',
+        replyToName: userName,
+        ts: Date.now()
+      });
+      saveForums();
+      var f = forums.find(function(x) { return x.id === currentForumId; });
+      if (f) renderForumPosts(f);
+    }
+  });
+}
+
+// 生成网友回复
+function generateForumNetizenReply(forum, post, myText) {
+  var apiCfg = apiConfigs.find(function(a) { return a.id === forum.apiId; });
+  if (!apiCfg) return;
+  
+  var userMask = getCurrentMask() || { nickname: myProfile.name };
+  var userName = userMask.nickname || myProfile.name || '用户';
+  
+  var prompt = '你是一个论坛的普通网友，请回复一条评论。\n\n';
+  
+  prompt += '【论坛世界观】\n' + (forum.worldview || '现实世界') + '\n\n';
+  
+  prompt += '【帖子内容】\n';
+  if (post.title) prompt += '标题：' + post.title + '\n';
+  prompt += '内容：' + post.content.substring(0, 150) + '\n\n';
+  
+  prompt += '【' + userName + '刚刚评论说】\n"' + myText + '"\n\n';
+  
+  prompt += '【回复要求】\n';
+  prompt += '1. 先给自己起一个有趣的网名（如"今天也要加油"、"吃瓜群众"、"路过的咸鱼"等）\n';
+  prompt += '2. 然后写回复内容\n';
+  prompt += '3. 像真实网友一样，可以附和、调侃、补充、提问等\n';
+  prompt += '4. 用网络用语，口语化，可以用表情\n\n';
+  
+  prompt += '【返回格式】\n';
+  prompt += '网名：xxx\n';
+  prompt += '回复：xxx';
+  
+  callForumApi(apiCfg, prompt, function(reply) {
+    if (reply) {
+      // 解析网名和回复
+      var nameMatch = reply.match(/网名[：:]\s*(.+)/);
+      var textMatch = reply.match(/回复[：:]\s*([\s\S]+)/);
+      
+      var netizenName = nameMatch ? nameMatch[1].trim() : '热心网友';
+      var replyText = textMatch ? textMatch[1].trim() : reply;
+      
+      // 清理可能的多余内容
+      netizenName = netizenName.replace(/\n[\s\S]*/, '').substring(0, 15);
+      
+      post.comments.push({
+        id: gid(),
+        authorType: 'netizen',
+        authorName: netizenName,
+        text: replyText,
+        replyTo: 'me',
+        replyToName: userName,
+        ts: Date.now()
+      });
+      saveForums();
+      var f = forums.find(function(x) { return x.id === currentForumId; });
+      if (f) renderForumPosts(f);
+    }
+  });
+}
+
+// 通用论坛API调用
+function callForumApi(apiCfg, prompt, callback) {
+  if (apiCfg.format === 'openai') {
+    var url = apiCfg.base.replace(/\/+$/, '');
+    url = url.endsWith('/v1') ? url + '/chat/completions' : url + '/v1/chat/completions';
+    
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiCfg.key },
+      body: JSON.stringify({
+        model: apiCfg.model,
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 200
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var reply = '';
+      if (data.choices && data.choices[0]) {
+        reply = data.choices[0].message.content.trim();
+      }
+      callback(reply);
+    })
+    .catch(function() { callback(''); });
+  } else {
+    var url2 = apiCfg.base.replace(/\/+$/, '') + '/v1beta/models/' + apiCfg.model + ':generateContent?key=' + apiCfg.key;
+    
+    fetch(url2, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { maxOutputTokens: 200 }
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var reply = '';
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        reply = data.candidates[0].content.parts.map(function(p) { return p.text; }).join('').trim();
+      }
+      callback(reply);
+    })
+    .catch(function() { callback(''); });
+  }
+}
+
+// ========== 论坛记忆挂载到私聊 ==========
+
+function getForumMemory(contactId) {
+  var memories = [];
+  
+  forums.forEach(function(forum) {
+    // 只处理包含该角色的论坛
+    if (!forum.members || forum.members.indexOf(contactId) === -1) return;
+    if (!forum.posts) return;
+    
+    // 找到与用户相关的互动
+    forum.posts.forEach(function(post) {
+      // 用户评论了该角色的帖子
+      if (post.authorType === 'contact' && post.authorId === contactId) {
+        var myComments = post.comments ? post.comments.filter(function(cm) {
+          return cm.authorType === 'me';
+        }) : [];
+        
+        if (myComments.length > 0) {
+          var lastComment = myComments[myComments.length - 1];
+          memories.push({
+            type: 'user_comment_on_post',
+            forumName: forum.name,
+            postContent: post.content.substring(0, 50),
+            userComment: lastComment.text.substring(0, 50),
+            ts: lastComment.ts
+          });
+        }
+      }
+      
+      // 该角色回复了用户的评论
+      if (post.comments) {
+        post.comments.forEach(function(cm) {
+          if (cm.authorType === 'contact' && cm.authorId === contactId && cm.replyTo === 'me') {
+            memories.push({
+              type: 'contact_reply_to_user',
+              forumName: forum.name,
+              replyText: cm.text.substring(0, 50),
+              ts: cm.ts
+            });
+          }
+        });
+      }
+    });
+  });
+  
+  // 按时间排序，取最近5条
+  memories.sort(function(a, b) { return b.ts - a.ts; });
+  memories = memories.slice(0, 5);
+  
+  if (memories.length === 0) return '';
+  
+  var lines = ['【论坛互动记录】'];
+  memories.forEach(function(m) {
+    if (m.type === 'user_comment_on_post') {
+      lines.push('- 在"' + m.forumName + '"论坛，对方评论了你的帖子："' + m.userComment + '"');
+    } else if (m.type === 'contact_reply_to_user') {
+      lines.push('- 在"' + m.forumName + '"论坛，你回复了对方："' + m.replyText + '"');
+    }
+  });
+  
+  return lines.join('\n');
+}
+
 // ========== 全屏模式功能 ==========
 var fullscreenToggle = document.getElementById('toggleFullscreen');
 
@@ -5188,6 +7615,49 @@ fullscreenToggle.addEventListener('click', function() {
     }
   }
 });
+
+// 悬浮全屏按钮
+var floatingBtn = document.getElementById('floatingFullscreenBtn');
+
+floatingBtn.addEventListener('click', function() {
+  var isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+  
+  if (isFullscreen) {
+    // 退出全屏
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  } else {
+    // 进入全屏
+    var elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  }
+});
+
+// 全屏后隐藏悬浮按钮，退出全屏后显示
+function updateFloatingBtn() {
+  var isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+  floatingBtn.style.display = isFullscreen ? 'none' : 'flex';
+}
+
+document.addEventListener('fullscreenchange', updateFloatingBtn);
+document.addEventListener('webkitfullscreenchange', updateFloatingBtn);
+document.addEventListener('mozfullscreenchange', updateFloatingBtn);
+document.addEventListener('MSFullscreenChange', updateFloatingBtn);
 
 // ========== 导入全部数据 ==========
 document.getElementById('btnImportData').addEventListener('click', function() {
@@ -5235,6 +7705,10 @@ if (data.currentMaskId !== undefined) {
   currentMaskId = data.currentMaskId;
   saveCurrentMaskId();
 }
+if (data.forums) {
+  forums = data.forums;
+  saveForums();
+}
 
       // 刷新界面
       renderContactList();
@@ -5253,14 +7727,6 @@ var moments = [];
 
 function saveMoments(cb) { dbSet('moments', moments, cb); }
 
-// 初始化时加载朋友圈数据 - 在 initApp 里补充
-var origInitApp = initApp;
-initApp = function() {
-  origInitApp();
-  dbGet('moments', function(v) {
-    moments = v || [];
-  });
-};
 
 function renderMomentsHeader() {
   document.getElementById('momentsMyName').textContent = myProfile.name || '我';
@@ -5445,12 +7911,14 @@ function renderMoments() {
       html += '</div>';
     }
 
-    // 操作栏
-    var iLiked = m.likes && m.likes.indexOf('me') !== -1;
-    html += '<div class="moment-actions">';
-    html += '<div class="moment-action-btn ' + (iLiked ? 'liked' : '') + '" data-action="like" data-mid="' + m.id + '">' + (iLiked ? '❤️' : '🤍') + ' 赞</div>';
-    html += '<div class="moment-action-btn" data-action="comment" data-mid="' + m.id + '">💬 评论</div>';
-    html += '</div>';
+   // 操作栏
+var iLiked = m.likes && m.likes.indexOf('me') !== -1;
+html += '<div class="moment-actions">';
+html += '<div class="moment-action-btn ' + (iLiked ? 'liked' : '') + '" data-action="like" data-mid="' + m.id + '">' + (iLiked ? '❤️' : '🤍') + ' 赞</div>';
+html += '<div class="moment-action-btn" data-action="comment" data-mid="' + m.id + '">评论</div>';
+html += '<div class="moment-action-btn delete" data-action="delete" data-mid="' + m.id + '">删除</div>';
+html += '</div>';
+
 
     // 评论输入框
     html += '<div class="moment-comment-input" id="commentInput_' + m.id + '" style="display:none;">';
@@ -5467,6 +7935,19 @@ function renderMoments() {
   var noEl = list.querySelector('.no-moments');
   list.innerHTML = html;
   if (noEl) list.appendChild(noEl);
+// 绑定删除事件
+list.querySelectorAll('[data-action="delete"]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var mid = btn.getAttribute('data-mid');
+    if (!confirm('确定要删除这条动态吗？')) return;
+    
+    // 从数组中删除
+    moments = moments.filter(function(m) { return m.id !== mid; });
+    saveMoments();
+    renderMoments();
+  });
+});
+
 
   // 绑定事件
   list.querySelectorAll('[data-action="like"]').forEach(function(btn) {
@@ -5603,32 +8084,127 @@ function triggerAiReactions(moment) {
 
     // 延迟，模拟真人
     setTimeout(function() {
-      // 先点赞
-      if (!moment.likes) moment.likes = [];
-      moment.likes.push(cid);
-      saveMoments();
-      renderMoments();
+// 先点赞（随机决定是否点赞）
+if (Math.random() > 0.3) { // 70%概率点赞
+  if (!moment.likes) moment.likes = [];
+  if (moment.likes.indexOf(cid) === -1) {
+    moment.likes.push(cid);
+    saveMoments();
+    renderMoments();
+    // 触发点赞通知
+    notifyMoments(c, 'like', '');
+  }
+}
 
-      // 再评论
+
+      // 再评论（延迟一点）
       setTimeout(function() {
         generateMomentComment(apiCfg, c, moment, null);
       }, 1000 + Math.random() * 2000);
-    }, (index + 1) * (1500 + Math.random() * 2000));
+    }, (index + 1) * (2000 + Math.random() * 3000));
   });
 }
 
-function generateMomentComment(apiCfg, contact, moment, replyToText) {
-  var prompt = '你是"' + contact.name + '"。';
-  if (contact.persona) prompt += '\n你的人设：' + contact.persona;
-  prompt += '\n\n你的朋友发了一条朋友圈：\n"' + moment.text + '"';
 
-  if (replyToText) {
-    prompt += '\n\n对方回复了你的评论说："' + replyToText + '"';
-    prompt += '\n请你自然地回复对方，只写你要回复的话，一句就好，简短自然，像真人一样。';
-  } else {
-    prompt += '\n\n请你作为朋友评论这条朋友圈，只写评论内容，一句话就好，简短自然，像真人一样。';
+function generateMomentComment(apiCfg, contact, moment, replyToText) {
+  // 获取用户的面具信息
+  var userMask = getMaskForContact(contact);
+  var userName = userMask.nickname || myProfile.name || '对方';
+  var userPersona = userMask.persona || myProfile.persona || '';
+  var userGender = userMask.gender || myProfile.gender;
+  
+  // 构建完整的提示词
+  var prompt = '你正在扮演"' + contact.name + '"在朋友圈互动。\n\n';
+  
+  // 角色人设
+  prompt += '【你的人设】\n';
+  if (contact.persona) prompt += contact.persona + '\n';
+  if (contact.gender) {
+    var gm = { male: '男性', female: '女性', other: '其他' };
+    prompt += '你的性别：' + (gm[contact.gender] || '') + '\n';
   }
-  prompt += '\n不要加任何前缀、标签、引号。';
+  prompt += '\n';
+  
+  // 用户信息
+  prompt += '【和你互动的人的信息】\n';
+  prompt += '名字：' + userName + '\n';
+  if (userGender) {
+    var gm2 = { male: '男性', female: '女性', other: '其他' };
+    prompt += '性别：' + (gm2[userGender] || '') + '\n';
+  }
+  if (userPersona) prompt += '关于TA：' + userPersona + '\n';
+  prompt += '你和TA是朋友关系。\n\n';
+  
+  // 聊天记录参考（最近10条）
+  if (contact.messages && contact.messages.length > 0) {
+    var recentMsgs = contact.messages.slice(-10);
+    prompt += '【你和' + userName + '最近的聊天记录（供参考，了解你们的关系和互动方式）】\n';
+    recentMsgs.forEach(function(msg) {
+      var sender = msg.role === 'user' ? userName : contact.name;
+      prompt += sender + '：' + msg.text.substring(0, 50) + (msg.text.length > 50 ? '...' : '') + '\n';
+    });
+    prompt += '\n';
+  }
+  
+  // 朋友圈内容
+  var isMyMoment = moment.authorType === 'me';
+  var momentAuthor = isMyMoment ? userName : contact.name;
+  
+  prompt += '【朋友圈动态】\n';
+  prompt += momentAuthor + ' 发布了一条朋友圈：\n';
+  prompt += '"' + moment.text + '"\n\n';
+  
+  // 已有的评论楼层
+  if (moment.comments && moment.comments.length > 0) {
+    prompt += '【已有的评论（按时间顺序）】\n';
+    moment.comments.forEach(function(cm) {
+      var cmName;
+      if (cm.authorType === 'me') cmName = userName;
+      else {
+        var cc = getContact(cm.authorId);
+        cmName = cc ? cc.name : '某人';
+      }
+      var replyStr = '';
+      if (cm.replyTo) {
+        var rtName;
+        if (cm.replyTo === 'me') rtName = userName;
+        else { var rc = getContact(cm.replyTo); rtName = rc ? rc.name : '某人'; }
+        replyStr = ' 回复 ' + rtName;
+      }
+      prompt += '- ' + cmName + replyStr + '：' + cm.text + '\n';
+    });
+    prompt += '\n';
+  }
+  
+  // 点赞信息
+  if (moment.likes && moment.likes.length > 0) {
+    var likers = moment.likes.map(function(lid) {
+      if (lid === 'me') return userName;
+      if (lid === contact.id) return '你';
+      var lc = getContact(lid);
+      return lc ? lc.name : '某人';
+    });
+    prompt += '点赞的人：' + likers.join('、') + '\n\n';
+  }
+  
+  // 具体任务
+  if (replyToText) {
+    prompt += '【你的任务】\n';
+    prompt += userName + ' 刚刚在评论区说了："' + replyToText + '"\n';
+    prompt += '请你自然地回复TA。\n';
+  } else if (isMyMoment) {
+    prompt += '【你的任务】\n';
+    prompt += '这是' + userName + '发的朋友圈，请你作为朋友评论一下。\n';
+  } else {
+    prompt += '【你的任务】\n';
+    prompt += '这是你自己发的朋友圈，' + userName + '可能会来互动，请你回复评论区的内容。\n';
+  }
+  
+  prompt += '\n【回复要求】\n';
+  prompt += '- 只写你要发的评论内容，不要加任何前缀、标签、引号\n';
+  prompt += '- 简短自然，像真人在朋友圈评论一样\n';
+  prompt += '- 可以用emoji\n';
+  prompt += '- 根据你们的关系和聊天风格来回复\n';
 
   if (apiCfg.format === 'openai') {
     var url = apiCfg.base.replace(/\/+$/, '');
@@ -5636,14 +8212,19 @@ function generateMomentComment(apiCfg, contact, moment, replyToText) {
     fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiCfg.key },
-      body: JSON.stringify({ model: apiCfg.model, messages: [{ role: 'user', content: prompt }], max_tokens: 100 })
+      body: JSON.stringify({ model: apiCfg.model, messages: [{ role: 'user', content: prompt }], max_tokens: 150 })
     }).then(function(r) { return r.json(); }).then(function(data) {
       var reply = '';
       if (data.choices && data.choices[0]) reply = data.choices[0].message.content.trim();
       if (reply) {
-        moment.comments.push({ id: gid(), authorType: 'contact', authorId: contact.id, replyTo: replyToText ? 'me' : null, text: reply, ts: Date.now() });
-        saveMoments(); renderMoments();
-      }
+  // 清理可能的前缀
+  reply = reply.replace(/^["'"']|["'"']$/g, '').trim();
+  moment.comments.push({ id: gid(), authorType: 'contact', authorId: contact.id, replyTo: replyToText ? 'me' : null, text: reply, ts: Date.now() });
+  saveMoments(); renderMoments();
+  // 触发朋友圈通知
+  notifyMoments(contact, 'comment', reply);
+}
+
     }).catch(function() {});
   } else {
     var url2 = apiCfg.base.replace(/\/+$/, '') + '/v1beta/models/' + apiCfg.model + ':generateContent?key=' + apiCfg.key;
@@ -5656,12 +8237,17 @@ function generateMomentComment(apiCfg, contact, moment, replyToText) {
       if (data.candidates && data.candidates[0] && data.candidates[0].content)
         reply = data.candidates[0].content.parts.map(function(p) { return p.text; }).join('').trim();
       if (reply) {
-        moment.comments.push({ id: gid(), authorType: 'contact', authorId: contact.id, replyTo: replyToText ? 'me' : null, text: reply, ts: Date.now() });
-        saveMoments(); renderMoments();
-      }
+  reply = reply.replace(/^["'"']|["'"']$/g, '').trim();
+  moment.comments.push({ id: gid(), authorType: 'contact', authorId: contact.id, replyTo: replyToText ? 'me' : null, text: reply, ts: Date.now() });
+  saveMoments(); renderMoments();
+  // 触发朋友圈通知
+  notifyMoments(contact, 'comment', reply);
+}
+
     }).catch(function() {});
   }
 }
+
 
 function triggerAiCommentReply(moment, contactId, myText) {
   var c = getContact(contactId);
@@ -5669,10 +8255,12 @@ function triggerAiCommentReply(moment, contactId, myText) {
   var apiCfg = c.apiId ? apiConfigs.find(function(a) { return a.id === c.apiId; }) : null;
   if (!apiCfg) return;
 
+  // 延迟回复，更真实
   setTimeout(function() {
     generateMomentComment(apiCfg, c, moment, myText);
   }, 2000 + Math.random() * 3000);
 }
+
 // ========== 获取朋友圈记忆 ==========
 function getMomentsMemory(contactId) {
   if (!moments || moments.length === 0) return '';
@@ -5737,20 +8325,59 @@ function triggerAiMoment(contact) {
   var apiCfg = contact.apiId ? apiConfigs.find(function(a) { return a.id === contact.apiId; }) : null;
   if (!apiCfg) return;
 
-  var prompt = '你是"' + contact.name + '"。';
-  if (contact.persona) prompt += '\n你的人设：' + contact.persona;
+  // 获取用户的面具信息
+  var userMask = getMaskForContact(contact);
+  var userName = userMask.nickname || myProfile.name || '朋友';
+
+  var prompt = '你正在扮演"' + contact.name + '"发朋友圈。\n\n';
+  
+  // 角色人设
+  prompt += '【你的人设】\n';
+  if (contact.persona) prompt += contact.persona + '\n';
   if (contact.gender) {
     var gm = { male: '男性', female: '女性', other: '其他' };
-    prompt += '\n你的性别：' + (gm[contact.gender] || '');
+    prompt += '你的性别：' + (gm[contact.gender] || '') + '\n';
   }
+  prompt += '\n';
 
+  // 时间信息
   var now = new Date();
   var weekDays = ['日', '一', '二', '三', '四', '五', '六'];
-  prompt += '\n当前时间：' + now.getHours() + ':' + now.getMinutes().toString().padStart(2, '0') + ' 星期' + weekDays[now.getDay()];
+  prompt += '【当前时间】\n';
+  prompt += now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ';
+  prompt += '星期' + weekDays[now.getDay()] + ' ';
+  prompt += now.getHours() + ':' + now.getMinutes().toString().padStart(2, '0') + '\n\n';
 
-  prompt += '\n\n请你发一条朋友圈动态，内容要符合你的人设和当前时间。';
-  prompt += '\n只写朋友圈内容，不要加任何前缀、标签。';
-  prompt += '\n内容简短自然，像真人发朋友圈一样，可以用emoji。';
+  // 聊天记录参考
+  if (contact.messages && contact.messages.length > 0) {
+    var recentMsgs = contact.messages.slice(-15);
+    prompt += '【你和朋友' + userName + '最近的聊天记录（可以参考，发一些相关的或者日常的动态）】\n';
+    recentMsgs.forEach(function(msg) {
+      var sender = msg.role === 'user' ? userName : '你';
+      prompt += sender + '：' + msg.text.substring(0, 60) + (msg.text.length > 60 ? '...' : '') + '\n';
+    });
+    prompt += '\n';
+  }
+
+  // 最近发过的朋友圈（避免重复）
+  var myRecentMoments = moments.filter(function(m) {
+    return m.authorType === 'contact' && m.authorId === contact.id && (Date.now() - m.ts) < 86400000;
+  }).slice(0, 3);
+  
+  if (myRecentMoments.length > 0) {
+    prompt += '【你今天已经发过的朋友圈（避免重复类似内容）】\n';
+    myRecentMoments.forEach(function(m) {
+      prompt += '- ' + m.text.substring(0, 40) + '\n';
+    });
+    prompt += '\n';
+  }
+
+  prompt += '【你的任务】\n';
+  prompt += '请发一条朋友圈动态。\n';
+  prompt += '- 内容要符合你的人设和当前时间\n';
+  prompt += '- 可以是日常分享、心情、感想、或者和最近聊天相关的内容\n';
+  prompt += '- 只写朋友圈内容，不要加任何前缀、标签\n';
+  prompt += '- 简短自然，像真人发朋友圈一样，可以用emoji\n';
 
   if (apiCfg.format === 'openai') {
     var url = apiCfg.base.replace(/\/+$/, '');
@@ -5762,7 +8389,10 @@ function triggerAiMoment(contact) {
     }).then(function(r) { return r.json(); }).then(function(data) {
       var text = '';
       if (data.choices && data.choices[0]) text = data.choices[0].message.content.trim();
-      if (text) publishAiMoment(contact, text);
+      if (text) {
+        text = text.replace(/^["'"']|["'"']$/g, '').trim();
+        publishAiMoment(contact, text);
+      }
     }).catch(function() {});
   } else {
     var url2 = apiCfg.base.replace(/\/+$/, '') + '/v1beta/models/' + apiCfg.model + ':generateContent?key=' + apiCfg.key;
@@ -5774,10 +8404,14 @@ function triggerAiMoment(contact) {
       var text = '';
       if (data.candidates && data.candidates[0] && data.candidates[0].content)
         text = data.candidates[0].content.parts.map(function(p) { return p.text; }).join('').trim();
-      if (text) publishAiMoment(contact, text);
+      if (text) {
+        text = text.replace(/^["'"']|["'"']$/g, '').trim();
+        publishAiMoment(contact, text);
+      }
     }).catch(function() {});
   }
 }
+
 
 function publishAiMoment(contact, text) {
   moments.unshift({
@@ -5793,7 +8427,10 @@ function publishAiMoment(contact, text) {
   });
   saveMoments();
   renderMoments();
+  // 触发朋友圈通知
+  notifyMoments(contact, 'post', text);
 }
+
 
 // 定时让角色发朋友圈（每15分钟检查一次）
 setInterval(function() {
@@ -6455,38 +9092,107 @@ document.getElementById('regenerateBtn').addEventListener('click', function() {
   if (apiCfg.format === 'openai') callOpenAI(apiCfg, c, sysMsg);
   else callGemini(apiCfg, c, sysMsg);
 });
+// ========== 接收消息功能 ==========
 
-// 更新重新回复按钮显示状态
-function updateRegenerateBtn(c) {
-  var btn = document.getElementById('regenerateBtn');
+// 更新接收消息按钮显示状态
+function updateReceiveMsgBtn(c) {
+  var btn = document.getElementById('receiveMsgBtn');
   if (!c || !c.messages || c.messages.length === 0) {
     btn.classList.remove('show');
     return;
   }
   
-  // 检查最后一条消息是否是AI回复
+  // 检查最后一条消息是否是用户发的（需要接收回复）
   var lastMsg = c.messages[c.messages.length - 1];
-  if (lastMsg.role === 'assistant') {
+  if (lastMsg.role === 'user') {
     btn.classList.add('show');
+    // 同时隐藏重新回复按钮
+    document.getElementById('regenerateBtn').classList.remove('show');
   } else {
     btn.classList.remove('show');
   }
 }
 
+// 点击接收消息按钮
+document.getElementById('receiveMsgBtn').addEventListener('click', function() {
+  var c = getContact(currentChatId);
+  if (!c) return;
+  
+  var btn = document.getElementById('receiveMsgBtn');
+  
+  // 防止重复点击
+  if (btn.classList.contains('loading')) return;
+  
+  // 获取API配置
+  var apiCfg = null;
+  if (c.apiId) apiCfg = apiConfigs.find(function(a) { return a.id === c.apiId; });
+  
+  if (!apiCfg) {
+    alert('还没有配置 API，请先在聊天设置中配置 API');
+    return;
+  }
+  
+  // 显示加载状态
+  btn.classList.add('loading');
+  btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;border-width:2px;"></div> 接收中...';
+  
+  // 隐藏按钮并显示打字指示器
+  setTimeout(function() {
+    btn.classList.remove('show');
+    btn.classList.remove('loading');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 3v10M6 9l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 17h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> 接收消息';
+    
+    showTyping(c);
+    
+    // 构建系统提示并请求AI
+    var sysMsg = buildSystemMessage(c);
+    
+    if (apiCfg.format === 'openai') callOpenAI(apiCfg, c, sysMsg);
+    else callGemini(apiCfg, c, sysMsg);
+  }, 300);
+});
+
+// 更新重新回复按钮显示状态
+function updateRegenerateBtn(c) {
+  var btn = document.getElementById('regenerateBtn');
+  var receiveBtn = document.getElementById('receiveMsgBtn');
+  
+  if (!c || !c.messages || c.messages.length === 0) {
+    btn.classList.remove('show');
+    receiveBtn.classList.remove('show');
+    return;
+  }
+  
+  // 检查最后一条消息
+  var lastMsg = c.messages[c.messages.length - 1];
+  if (lastMsg.role === 'assistant') {
+    // 最后是AI回复，显示重新回复按钮
+    btn.classList.add('show');
+    receiveBtn.classList.remove('show');
+  } else {
+    // 最后是用户消息，显示接收消息按钮
+    btn.classList.remove('show');
+    receiveBtn.classList.add('show');
+  }
+}
+
+
 // 提取构建系统消息的函数
 function buildSystemMessage(c) {
   var sysMsg = '你正在扮演一个真实的人在聊天软件上和对方聊天。\n';
   sysMsg += '【重要规则 - 必须严格遵守】\n';
-  sysMsg += '- 你只能以你自己的身份回复，绝对不能模拟、代替、扮演对方说话\n';
+  sysMsg += '- 你只能以你自己的身份回复，绝对不能模拟、代替、扮演对方说话，也绝对不要提及要和用户见面，或者等待和用户见面，要见面相关的所有话术绝对不许提，必须分成多条消息发送，不能只有一条消息\n';
   sysMsg += '- 绝对不要生成类似"Human:"、"用户:"、"对方:"这样的内容\n';
   sysMsg += '- 绝对不要替对方写任何回复\n';
   sysMsg += '- 你只能发送纯对话文本，像真人在聊天软件上发消息一样\n';
   sysMsg += '- 绝对不要写旁白、动作描写、括号内容、心理描写、场景描写\n';
   sysMsg += '- 不要用*号或括号描述任何动作或心理活动\n';
   sysMsg += '- 不要写任何角色标签或前缀\n';
-  sysMsg += '- 你可以一次回复一到三句话，每句话单独一行，像真人发多条消息一样\n';
-  sysMsg += '- 每句话都要简短自然，不要太长\n';
-  sysMsg += '- 根据对话情境决定回复几条，日常闲聊可以两三条，激动或话多的时候可以四五条以上\n';
+sysMsg += '- 你可以一次回复多句话，每句话单独一行，像真人在聊天软件上连续发多条消息一样\n';
+sysMsg += '- 每句话都要简短自然，像真人发消息那样\n';
+sysMsg += '- 回复多少条完全由你根据当前对话情境自然决定：\n';
+sysMsg += '  · 话多、激动、解释事情、分享故事时可以五条甚至更多\n';
+sysMsg += '  · 总之怎么真实怎么来，不要刻意限制自己\n';
   sysMsg += '- 可以用emoji表情\n';
   sysMsg += '- 回复只包含你说的话，不要有任何其他格式\n\n';
 
@@ -6518,6 +9224,12 @@ function buildSystemMessage(c) {
       sysMsg += momentsContext + '\n';
     }
   }
+// 论坛记忆
+var forumMemory = getForumMemory(c.id);
+if (forumMemory) {
+  sysMsg += '\n' + forumMemory + '\n';
+  sysMsg += '如果对方提到论坛相关的话题，你可以自然地回应。\n';
+}
 
   // 用户信息（使用绑定的面具）
   var userMask = getMaskForContact(c);
@@ -6553,22 +9265,18 @@ function sendMessage() {
   var apiCfg = null;
   if (c.apiId) apiCfg = apiConfigs.find(function(a) { return a.id === c.apiId; });
 
-  if (!apiCfg) {
-    setTimeout(function() {
-      c.messages.push({ role: 'assistant', text: '还没有配置 API，请点击右上角菜单编辑角色或返回添加 API 配置。', ts: Date.now() });
-      saveContacts(); renderMessages(c); scrollToBottom();
-    }, 500);
-    return;
-  }
-
-  showTyping(c);
-
-  // 构建系统提示
-var sysMsg = buildSystemMessage(c);
+if (!apiCfg) {
+  // 即使没有API配置，也允许发送消息，点击接收时再提示
+  updateReceiveMsgBtn(c);
+  scrollToBottom();
+  return;
+}
 
 
-  if (apiCfg.format === 'openai') callOpenAI(apiCfg, c, sysMsg);
-  else callGemini(apiCfg, c, sysMsg);
+  // 不再自动请求AI回复，而是显示"接收消息"按钮
+updateReceiveMsgBtn(c);
+scrollToBottom();
+
 }
 
 
@@ -6606,6 +9314,8 @@ if (lines.length === 1) {
   contact.messages.push({ role: 'assistant', text: lines[0], ts: Date.now() });
   saveContacts(); renderMessages(contact); scrollToBottom();
   updateRegenerateBtn(contact);
+  // 触发消息通知
+  notifyNewMessage(contact, lines[0]);
   return;
 }
 
@@ -6621,12 +9331,15 @@ if (lines.length === 1) {
       hideTyping();
       contact.messages.push({ role: 'assistant', text: lines[i], ts: Date.now() });
       saveContacts(); renderMessages(contact); scrollToBottom();
-      i++;
+i++;
 if (i < lines.length) {
   sendNext();
 } else {
   updateRegenerateBtn(contact);
+  // 触发消息通知（只通知最后一条）
+  notifyNewMessage(contact, lines[lines.length - 1]);
 }
+
 
     }, delay);
   }
